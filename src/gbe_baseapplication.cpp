@@ -3,7 +3,7 @@
 gibbie-02
 Copyright (c) 2020-2020, Gianluca Belardelli
 
-File:    vk_layers.h
+File:    gbe_baseapplication.cpp
 Author:  Gianluca Belardelli
 Date:    22/12/2020
 
@@ -21,18 +21,39 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 **************************************************************/
-#pragma once
+#include "gbe_baseapplication.h"
 
-#include <vector>
 
-const std::vector<const char*> validation_layers_list = {
-	"VK_LAYER_KHRONOS_validation",
-	"VK_LAYER_LUNARG_api_dump"
-};
+GBEBaseApplication::GBEBaseApplication(std::string& appName, uint32_t appFlags) :
+	mAppName(appName), mAppFlags(appFlags)
+{
+}
 
-#ifdef _DEBUG
-	constexpr bool enableValidationLayers = true;
-#else
-	constexpr bool enableValidationLayers = false;
-#endif
+GBEBaseApplication::~GBEBaseApplication()
+{
+}
 
+void GBEBaseApplication::run()
+{
+	if (!init())
+		return;
+
+	mainLoop();
+
+	cleanup();
+}
+
+bool GBEBaseApplication::init()
+{
+	onInitialize();
+	return true;
+}
+
+void GBEBaseApplication::mainLoop()
+{
+}
+
+void GBEBaseApplication::cleanup()
+{
+	onFinalize();
+}

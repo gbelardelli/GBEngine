@@ -1,11 +1,11 @@
 /*************************************************************
 
-GBEngine-01
+gibbie-02
 Copyright (c) 2020-2020, Gianluca Belardelli
 
 File:    main.cpp
 Author:  Gianluca Belardelli
-Date:    23/12/2020
+Date:    22/12/2020
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **************************************************************/
 #include <string>
 #include <iostream>
+#include "gbe_basewindow.h"
 
 extern bool InitVulkan(std::string appName, int appMaj, int appMin, int appBuild);
 extern void ShutdownVulkan();
@@ -52,5 +53,10 @@ int main(int argc, char *argv[])
 	std::cout << "Vulkan device creata con successo." << std::endl;
 	ShutdownVulkan();
 
+	GBEBaseWindow *wnd = GBEBaseWindow::CreateGBEWindow(std::string("Test engine"), 10, 10, 800, 600, GBEWindowCanClose | GBEWindowHaveTitlebar);
+	wnd->show(true);
+
+	while (!wnd->pollEvents());
+	delete wnd;
 	return 0;
 }

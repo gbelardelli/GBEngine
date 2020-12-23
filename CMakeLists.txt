@@ -10,11 +10,16 @@ set(HAVE_LIBC TRUE)
 set(src
     src/main.cpp
 	src/vk_init.cpp
+	src/gbe_baseapplication.cpp
+	src/gbe_win32Window.cpp
 )
  
 set(include
 	src/vk_layers.h
 	src/vk_extensions.h
+	src/gbe_baseapplication.h
+	src/gbe_basewindow.h
+	src/gbe_win32Window.h
 )
 
 

@@ -1,11 +1,11 @@
 /*************************************************************
 
-gibbie-01
+gibbie-02
 Copyright (c) 2020-2020, Gianluca Belardelli
 
 File:    vk_extensions.h
 Author:  Gianluca Belardelli
-Date:    17/12/2020
+Date:    22/12/2020
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
