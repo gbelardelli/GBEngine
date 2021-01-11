@@ -1,6 +1,6 @@
 /*************************************************************
 
-gibbie-02
+gibbie-03
 Copyright (c) 2020-2020, Gianluca Belardelli
 
 File:    gbe_baseapplication.cpp
@@ -22,15 +22,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 **************************************************************/
 #include "gbe_baseapplication.h"
+#include "gbe_basewindow.h"
 
-
-GBEBaseApplication::GBEBaseApplication(std::string& appName, uint32_t appFlags) :
-	mAppName(appName), mAppFlags(appFlags)
+GBEBaseApplication::GBEBaseApplication(std::string appName, uint32_t appFlags) :
+	mAppName(appName), mAppFlags(appFlags), mMainWindow(nullptr)
 {
 }
 
 GBEBaseApplication::~GBEBaseApplication()
 {
+	if (mMainWindow)
+		delete mMainWindow;
 }
 
 void GBEBaseApplication::run()
@@ -45,15 +47,31 @@ void GBEBaseApplication::run()
 
 bool GBEBaseApplication::init()
 {
-	onInitialize();
+	if (mMainWindow)
+		return false;
+
+	mMainWindow = GBEBaseWindow::CreateGBEWindow(mAppName);
+	
+	if (!onInitialize())
+		return false;
+
+	mMainWindow->show(true);
+
 	return true;
 }
 
 void GBEBaseApplication::mainLoop()
 {
+	for(;;)
+	{
+		if (mMainWindow->pollEvents())
+			break;
+	}
 }
 
 void GBEBaseApplication::cleanup()
 {
 	onFinalize();
+
+	mMainWindow->close();
 }

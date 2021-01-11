@@ -1,6 +1,6 @@
 /*************************************************************
 
-gibbie-02
+gibbie-03
 Copyright (c) 2020-2020, Gianluca Belardelli
 
 File:    main.cpp
@@ -23,17 +23,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **************************************************************/
 #include <string>
 #include <iostream>
-#include "gbe_basewindow.h"
+#include "GameApplication.h"
 
 extern bool InitVulkan(std::string appName, int appMaj, int appMin, int appBuild);
 extern void ShutdownVulkan();
 extern bool InitDevice();
 
-int main(int argc, char *argv[])
+GameApplication gGame;
+
+int main(int argc, char* argv[])
 {
-	ShutdownVulkan();
 	bool res = InitVulkan("Test", 1, 0, 0);
-	if(!res)
+	if (!res)
 	{
 		std::cout << "Errore durante l'inizializzazione di Vulkan" << std::endl;
 		ShutdownVulkan();
@@ -53,10 +54,6 @@ int main(int argc, char *argv[])
 	std::cout << "Vulkan device creata con successo." << std::endl;
 	ShutdownVulkan();
 
-	GBEBaseWindow *wnd = GBEBaseWindow::CreateGBEWindow(std::string("Test engine"), 10, 10, 800, 600, GBEWindowCanClose | GBEWindowHaveTitlebar);
-	wnd->show(true);
-
-	while (!wnd->pollEvents());
-	delete wnd;
+	gGame.run();
 	return 0;
 }

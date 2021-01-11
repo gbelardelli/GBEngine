@@ -1,6 +1,6 @@
 /*************************************************************
 
-gibbie-02
+gibbie-03
 Copyright (c) 2020-2020, Gianluca Belardelli
 
 File:    gbe_baseapplication.h
@@ -24,25 +24,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 #include <string>
+#include "gbe_types.h"
+
+class GBEBaseWindow;
 
 class GBEBaseApplication
 {
 protected:
-	std::string	mAppName;
-	uint32_t mAppFlags;
+	std::string		mAppName;
+	uint32_t		mAppFlags;
+	GBEBaseWindow	*mMainWindow;
 
 private:
 	bool init();
 	void mainLoop();
 	void cleanup();
 
-	virtual void onInitialize() = 0;
+protected:
+	GBEBaseApplication(std::string appName, uint32_t appFlags = 0);
+
+	virtual bool onInitialize() = 0;
 	virtual void onFinalize(void) = 0;
 	virtual void onUpdate(float fElapsedTime) = 0;
 	virtual void onRender(float fElapsedTime) = 0;
+
 public:
 	GBEBaseApplication() = delete;
-	GBEBaseApplication(std::string& appName, uint32_t appFlags = 0);
 	
 	virtual ~GBEBaseApplication();
 	

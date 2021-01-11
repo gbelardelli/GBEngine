@@ -12,6 +12,7 @@ set(src
 	src/vk_init.cpp
 	src/gbe_baseapplication.cpp
 	src/gbe_win32Window.cpp
+	src/gbengine.cpp
 )
  
 set(include
@@ -20,6 +21,8 @@ set(include
 	src/gbe_baseapplication.h
 	src/gbe_basewindow.h
 	src/gbe_win32Window.h
+	src/gbe_types.h
+	src/gbengine.h
 )
 
 

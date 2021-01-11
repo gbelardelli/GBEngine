@@ -1,6 +1,6 @@
 /*************************************************************
 
-gibbie-02
+gibbie-03
 Copyright (c) 2020-2020, Gianluca Belardelli
 
 File:    gbe_win32Window.cpp
@@ -79,7 +79,7 @@ void GBEWin32Window::close()
 	CloseWindow(mWnd);
 }
 
-void* GBEWin32Window::getNativeHandle()
+GBEWINDOWHANDLE GBEWin32Window::getNativeHandle()
 {
 	return mWnd;
 }
@@ -226,4 +226,9 @@ GBEWin32Window* __CreateWindowInternal(std::string &title, int xPos, int yPos, i
 GBEBaseWindow* GBEBaseWindow::CreateGBEWindow(std::string &title, int xPos, int yPos, int width, int height, unsigned int flags)
 {
 	return __CreateWindowInternal(title, xPos, yPos, width, height, flags);
+}
+
+GBEBaseWindow* GBEBaseWindow::CreateGBEWindow(std::string& title, GBEWindowStyle flags)
+{
+	return __CreateWindowInternal(title, 0, 0, 800, 600, flags);
 }

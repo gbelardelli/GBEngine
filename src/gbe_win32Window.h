@@ -1,6 +1,6 @@
 /*************************************************************
 
-gibbie-02
+gibbie-03
 Copyright (c) 2020-2020, Gianluca Belardelli
 
 File:    gbe_win32Window.h
@@ -55,6 +55,6 @@ public:
 	void show(bool update) override final;
 	void close() override final;
 	bool pollEvents() override final;
-	void* getNativeHandle() override final;
+	GBEWINDOWHANDLE getNativeHandle() override final;
 
 };

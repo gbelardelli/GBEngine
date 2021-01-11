@@ -1,11 +1,11 @@
 /*************************************************************
 
-gibbie-03
+GBEngine
 Copyright (c) 2020-2020, Gianluca Belardelli
 
-File:    vk_layers.h
+File:    gbengine.cpp
 Author:  Gianluca Belardelli
-Date:    22/12/2020
+Date:    23/12/2020
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,18 +21,27 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 **************************************************************/
-#pragma once
+#include "gbengine.h"
+#include "gbe_basewindow.h"
 
-#include <vector>
+GBEngineConfig gEngineConfig;
+GBEPlatformConfig gPlatformConfig;
 
-const std::vector<const char*> validation_layers_list = {
-	"VK_LAYER_KHRONOS_validation",
-	"VK_LAYER_LUNARG_api_dump"
-};
+uint32_t _initPlatform(void)
+{
+	return 0;
+}
 
-#ifdef _DEBUG
-	constexpr bool enableValidationLayers = true;
-#else
-	constexpr bool enableValidationLayers = false;
-#endif
+bool GBEngine::Init(GBEngineConfig& initConfig)
+{
+	gEngineConfig = initConfig;
+	if (_initPlatform())
+		return false;
 
+	return true;
+}
+
+GBEngineConfig& GBEngine::getDefaultEngineConfigStruct()
+{
+	return GBEngineConfig();
+}

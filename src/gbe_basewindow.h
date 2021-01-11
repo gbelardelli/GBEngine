@@ -1,6 +1,6 @@
 /*************************************************************
 
-gibbie-02
+gibbie-03
 Copyright (c) 2020-2020, Gianluca Belardelli
 
 File:    gbe_basewindow.h
@@ -24,17 +24,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 #include <string>
+#include "gbe_types.h"
 
-enum GBEWindowStyle
-{
-	GBEWindowCanClose = 0x1,
-	GBEWindowCanResize = 0x2,
-	GBEWindowHaveTitlebar = 0x4,
-	GBEWindowCentered = 0x8,
-	GBEWindowFullscreen = 0x10,
 
-	GBEWindowDefault = GBEWindowCanClose | GBEWindowCanResize | GBEWindowHaveTitlebar | GBEWindowCentered
-};
 
 class GBEBaseWindow
 {
@@ -48,7 +40,8 @@ public:
 	virtual void show(bool update) = 0;
 	virtual void close() = 0;
 	virtual bool pollEvents() = 0;
-	virtual void *getNativeHandle() = 0;
+	virtual GBEWINDOWHANDLE getNativeHandle() = 0;
 
 	static GBEBaseWindow* CreateGBEWindow(std::string &title, int xPos, int yPos, int width, int height, unsigned int flags);
+	static GBEBaseWindow* CreateGBEWindow(std::string& title, GBEWindowStyle flags = GBEWindowDefaultNoResize);
 };
