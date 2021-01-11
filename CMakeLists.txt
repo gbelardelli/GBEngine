@@ -4,8 +4,6 @@ set(project_name GBEngine)
 
 project(${project_name})
 
-set_property (DIRECTORY PROPERTY VS_STARTUP_PROJECT "GBEngine")
-
 set(HAVE_LIBC TRUE)
 set(src
     src/main.cpp
@@ -13,6 +11,7 @@ set(src
 	src/gbe_baseapplication.cpp
 	src/gbe_win32Window.cpp
 	src/gbengine.cpp
+	src/GameApplication.cpp
 )
  
 set(include
@@ -23,10 +22,14 @@ set(include
 	src/gbe_win32Window.h
 	src/gbe_types.h
 	src/gbengine.h
+	src/GameApplication.h
 )
 
 
 add_executable(${project_name} ${src} ${include} build.licenseheader)
+
+set_property(TARGET ${project_name} PROPERTY VS_DPI_AWARE "ON")
+set_property (DIRECTORY PROPERTY VS_STARTUP_PROJECT ${project_name})
 
 find_package(Vulkan)
 
